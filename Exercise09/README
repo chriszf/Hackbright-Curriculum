@@ -1,0 +1,18 @@
+Exercise 09: More practice!
+=======
+
+Introduction
+-------
+Practice needs no introduction!
+
+Description
+-------
+Here are some fairly standard programs every programmer must write in the process of learning. 
+You've already written the guessing game and the temperature converter. Try to do the others:
+
+http://mypythonquiz.com/list.php
+http://people.csail.mit.edu/pgbovine/python/question.html?remove-dups#mode=edit
+http://people.csail.mit.edu/pgbovine/python/question.html?two-sum#mode=edit
+http://www.openbookproject.net/pybiblio/practice/wilson/
+
+All of them are doable with your current skillset, but some will require more complex composition of everything you know. Try to get as far as you can!
