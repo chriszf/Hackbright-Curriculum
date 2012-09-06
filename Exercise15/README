@@ -1,0 +1,13 @@
+Exercise 15: Reading practice
+=======
+
+Introduction
+-------
+An essential but unpracticed skill is reading other people's code. Today, we'll
+be doing a little bit of reading practice.
+
+Description
+-------
+In reading.py are a number of functions with mystery names. Your mission,
+should you choose to accept it, is to, _without_ executing the code, rename and
+document the functions according to what they do.
