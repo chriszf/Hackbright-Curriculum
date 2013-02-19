@@ -1,18 +1,55 @@
-Exercise 09: More practice!
-=======
+Exercise 09: Files, Creative uses of lists
+==========================================
 
 Introduction
--------
-Practice needs no introduction!
+------------
+Files can be opened using the .open method, and then processed one character at a time as a bytestream using the .read method with an argument of 1:
 
-Description
--------
-Here are some fairly standard programs every programmer must write in the process of learning. 
-You've already written the guessing game and the temperature converter. Try to do the others:
+    f = open("myfile.txt")
+    firstletter = f.read(1)
+    f.close()
 
-http://mypythonquiz.com/list.php
-http://people.csail.mit.edu/pgbovine/python/question.html?remove-dups#mode=edit
-http://people.csail.mit.edu/pgbovine/python/question.html?two-sum#mode=edit
-http://www.openbookproject.net/pybiblio/practice/wilson/
+The entire file can be read in all at once using the .read method with no arguments:
 
-All of them are doable with your current skillset, but some will require more complex composition of everything you know. Try to get as far as you can!
+    f = open("myfile.txt")
+    filetext = f.read()
+    f.close()
+
+Once a file has been read, it can be iterated through as if it were a list:
+
+    # Print one character at a time to the screen
+    for char in filetext:
+        print char
+
+Problem Description
+-------------------
+Write a program, lettercount.py, that opens a file named on the command line and counts how many times each letter occurs in that file. Your program should then print those counts to the screen, in alphabetical order. For example:
+
+    inputfile.txt:
+    An abacus
+
+    $ python lettercount.py inputfile.txt
+    3
+    1
+    1
+    0
+    0
+    ...
+
+Once you've produced appropriate output, you can visualize it by piping the contents of your program to the 'spark' utility installed on your computer:
+
+    $ python lettercount.py inputfile.txt | spark
+    ▃▂▄▁▇▅█▁▇▂▁▁▅▃▅▇▁▄▄▂▂▇▆▄▂▄
+
+You may find the following two methods useful:
+    string.lower()
+    ord()
+
+We have provided a file 'twain.txt' for you to test your code on.
+
+Resources:
+    * http://learnpythonthehardway.org/book/ex15.html
+    * http://learnpythonthehardway.org/book/ex16.html
+    * http://learnpythonthehardway.org/book/ex17.html
+    * http://www.asciitable.com/
+    * http://docs.python.org/library/functions.html#ord

@@ -1,182 +1,111 @@
-Exercise 10: Classes and objects
-=======
+Exercise 10: Files and dicts
+============================
 
 Introduction
--------
-Earlier in the course, we looked at the idea of storing the concept of a 'person' as a hash:
+------------
+Files can also be iterated line-by-line, using a for loop on the file directly.
 
-    joe = { "name": "Joe Smith",
-            "age": 34,
-            "location": "Los Angeles, CA",
-            "likes": ["fishing", "swimming", "eating"] }
+For example:
+    twain = open('twain.txt')
+    for line in twain:
 
-Through a series of nested hashes and lists, we can encapsulate all of the relevant information about joe in a single place. This nesting enables us to manipulate much more complex data than we were originally playing with.
+        # Do something
 
-Classes are a way to formalize the description of this data structure. Consider this similar example.
+The loop variable 'line' will store each line of the file in turn.
 
-    fido = { "animal": "Dog",
-             "name": "Fido",
-             "age": 7,
-             "owner": "Joe",
-             "fleas": ["Peter", "Paul", "Mary"] }
+Dictionaries can also be iterated entry-by-entry, using the method iteritems().
 
-This hash represents a pet. Not only that, it represents a specific pet. This is great if we're writing a program _about_ Fido specifically. But more likely than not, if we're writing a program about pets, it would probably make sense to allow for the existence of more than one pet in the system.
+For example:
+    my_dict = {'a': 1, 'b': 2, 'c': 3}
+    for key, value in my_dict.iteritems():
+        print "Key == %r, value == %r" % (key, value)+--********
 
-It makes sense to come up with a consistent way to describe pets, so we don't have to write special code to deal with individual pets. If we take a step back, we can use fido as a template to describe all our other pets.
+Prints:
+Key == 'a', value == 1
+Key == 'b', value == 2
+Key == 'c', value == 3
 
-    # Generic template for pets
-    { "animal": ???,
-      "name": ???,
-      "age": ???,
-      "owner": ???,
-      "fleas": [???] }
+This introduces two loop variables, 'key' and 'value', that will store the key
+and value elements of each dictionary entry in turn.
 
-We can then write a function to fill in this template:
+*** NOTE ***
+Before continuing with the problem below, make sure you read the linked resources
+at the bottom of this file.
 
-    def make_pet(name, animal_type, age, owner, flea_list):
-        return {"name": name,
-                "animal": animal_type,
-                "age": age,
-                "owner": owner,
-                "fleas": flea_list}
+Problem Description
+-------------------
 
-And now, I can make a list of all my hamsters:
+Write a program, wordcount.py, that opens a file named on the command
+line and counts how many times each space-separated word occurs in
+that file. Your program should then print those counts to the
+screen. For example:
 
-    my_hamsters = [ make_pet("Prince", "Hamster", 1, "Christian", []),
-                    make_pet("Hamlet", "Hamster", 1, "Christian", []),
-                    make_pet("Professor Snugglesworth", "Hamster", 1, "Christian", []),
-                    make_pet("Doctor Fishopolis", "Hamster", 1, "Christian", []) ]
+    inputfile.txt:
+    As I was going to St. Ives
+    I met a man with seven wives
+    Every wife had seven sacks
+    Every sack had seven cats
+    Every cat had seven kits
+    Kits, cats, sacks, wives.
+    How many were going to St. Ives?
 
+    $ python wordcount.py inputfile.txt
+    seven 4
+    Kits, 1
+    sack 1
+    As 1
+    kits 1
+    Ives? 1
+    How 1
+    St. 2
+    had 3
+    sacks, 1
+    to 2
+    going 2
+    was 1
+    cats, 1
+    wives 1
+    met 1
+    Every 3
+    with 1
+    man 1
+    a 1
+    wife 1
+    I 2
+    many 1
+    cat 1
+    Ives 1
+    sacks 1
+    wives. 1
+    were 1
+    cats 1
 
-    print my_hamsters[2]['name']
-        => Professor Snugglesworth
+You may find the following methods useful:
+    string.split()
+    string.strip()
+    dict.setdefault()
+    dict.iteritems()
 
-In their most basic usage, classes are an alternate mechanism for doing something very similar. Here is an analogous structure.
+We have provided a file 'twain.txt' for you to test your code on.
 
-    class Pet(object):
-        def __init__(self, name, animal_type, age, owner, flea_list):
-            self.name = name
-            self.animal_type = animal_type
-            self.age = age
-            self.owner = owner
-            self.flea_list = flea_list
+Extra Credit
 
-        def print_name(self):
-            print self.name
+The output of your program is not as nice as it could be. Try to improve it:
 
-    my_hamsters = [ Pet("Prince", "Hamster", 1, "Christian", []),
-                    Pet("Hamlet", "Hamster", 1, "Christian", []),
-                    Pet("Professor Snugglesworth", "Hamster", 1, "Christian", []),
-                    Pet("Doctor Fishopolis", "Hamster", 1, "Christian", []) ]
+    * Some words are counted separately due to punctuation. Remove punctuation
+      so that they appear as the same word in the output.
 
-    print my_hamsters[2].name
-        => Professor Snugglesworth
+    * In the example above, 'Kits' and 'kits' are treated separately because they
+      have different capitalization. Make all words lowercase so that
+      capitalization doesn't matter.
 
-    my_hamsters[2].print_name()
-        => Professor Snugglesworth
+    * Sort the output from the highest frequency words to the lowest frequency
+      words.
 
-A class is defined with the following syntax:
-
-    class MyClass(object):
-
-The word 'class' is required in front, and the (object) is required after your class name. It looks very much like a function call, but it is not. You will have to remember this special case usage of parentheses and the word object.
-
-There is always a special method inside a class named __init__. It is analogous to our make_hamster() function above. If you think of the class as a template that represents all hamsters everywhere, the 'initializer', __init__, is a way to fill in that template. This creates an 'instance'.
-
-Notice that we can put functions inside classes. When we do so, they are called methods. To clarify, functions that live outside a class are just functions, but on a class, they are called methods. Methods have a special parameter on them, 'self', that behaves a little weirdly from other methods. Look at the signature:
-    
-    def print_name(self):
-
-It takes one parameter, apparently named 'self'. All methods on a class must start with the parameter 'self'. Now, look at the invocation of the method,
-    
-    my_hamsters[2].print_name()
-
-Even though it takes one parameter, it somehow doesn't seem to be used. To understand this, let's take a look at a simple example without methods.
-
-    def print_hamster_name(hamster):
-        print hamster.name
-
-    h = Pet("Hamlet", "Hamster", 1, "Christian", [])
-
-    print_pet_name(h)
-        => Hamlet
-
-Now, let's take a simplified look under the hood at what happens in the class.
-
-When we have the following class definition:
-
-    class Pet(object):
-        def print_name(self):
-            print self.name
-
-    h = Pet(...)
-    h.print_name()
-
-Python looks at the class and the methods inside it, and secretly rewrites them to something roughly like so:
-
-    class Pet(object):
-        def print_name(self):
-
-    becomes
-
-    def __Pet_print_name__(self):
-        print self.name
-
-So in the later line, python recognizes that print_name is a method on the Hamster class and replaces the line with the rewritten name.
-
-    h.print_name()
-
-    becomes
-
-    __Pet_print_name__(h)
-
-In this way, the method becomes equivalent to our earlier example, but is much more convenient to use.
-
-For now, classes can largely be thought of as an organizational tool.
-
-Briefly, let's explore the concept of inheritance. We have a class, Pet, which is a generic pet type, but we seem to be making an awful lot of Hamsters. Inheritance lets us take a class and narrow down the specificity of that class. In this example, we can piggyback off all the work we did in the Pet class to make a Hamster class.
-
-    class Hamster(Pet):                 # Notice instead of 'object', we're using 'Pet' in the parentheses.
-        def __init__(self, name, age, owner):
-            self.name = name
-            self.animal = "Hamster"     # A 'Hamster' object will always have the animal property set to 'Hamster'
-            self.age = age
-            self.owner = owner
-            self.fleas  = []            # Hamsters don't get fleas
-
-        def chitter(self):
-            print "%s makes a chittering sound."%(self.name)
-
-    h = Hamster("Professor Snugglesworth", 1, "Christian")
-    h.print_name()
-        => Professor Snugglesworth
-    h.chitter()
-        => Professor Snugglesworth makes a chittering sound.
-    
-In this way, we can reuse functionality defined on 'Pet', namely, the print_name method, while narrowing down the behavior of the __init__ method to always fill in certain fields correctly. Finally, we can add additional behavior on Hamster (that is not available on Pet objects), the capability to chitter. When we do this, we say Hamster is a 'descendant' of pet. And in this case, Professor Snugglesworth is an 'instance' of Hamster.
-
-When we write code, we always have to think, what is the data type of my variable. Classes are a way for us to make a new datatype. Here, the variable 'h' is of type 'Hamster', in the same way a variable can be a 'list'. Oftentimes, we will write code that expects a specific class. As a rule, we cannot use ancestor classes where we expect a descendant: a 'Hamster' can be used any place where a 'Pet' is expected, but not the other way around. It is easy to see here why this is the case, if code expects to call the chitter() method, that method does not exist on a 'Pet', but it does on a 'Hamster'.
-
-It is sometimes hard to grasp the concepts of classes, objects, inheritance, and instances all at once. Try this analogy. A musical score is the blueprint for a song. Each performance of the song will use the musical score as a template, but will have things slightly different in each case: maybe the guitar used will be different, or you will be using a different drummer.
-
-Sometimes, someone will take your score and make a modified score as a cover band. They use this score as their template for their performances. When someone who who heard the original first finally listens to the cover band version, they think, "Sure, it's got extra stuff, but it's more or less the same song." However, when someone who only knows about the cover version encounters the original, they think, "It's missing important pieces, this is unacceptable." 
-
-The score is our class. Each performance is an instance of that class. The cover band version is a descendant of our class, and it can have it's own instances. An instance of the descendant is usable wherever an instance of the original is expected, but not the other way around.
-
-
-Description
--------
-In exercise10.py, you will find some hashes and functions that can be converted to classes and methods. Do this with the assistance of the tests. In this folder, run the following command:
-
-    py.test -x
-
-When all the tests pass, you will have finished the exercise. However, spend a little time trying to model real-life concepts as a class. For example how would you model a students in a classroom? How would you model furniture?
-
-Concepts required:
-    * dictionaries
-    * classes
+    * Sort words having the same frequency alphabetically.
 
 Resources:
-    * http://learnpythonthehardway.org/book/ex40.html
-    * http://learnpythonthehardway.org/book/ex41.html
-    * http://learnpythonthehardway.org/book/ex42.html
+    * http://learnpythonthehardway.org/book/ex39.html
+    * http://www.learnpython.org/page/Dictionaries
+    * http://docs.python.org/library/stdtypes.html#string-methods
+    * http://docs.python.org/library/stdtypes.html#mapping-types-dict

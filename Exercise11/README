@@ -1,103 +1,118 @@
-Exercise 11: Trees
+Exercise 07: Files and dictionaries
 =======
 
 Introduction
--------
-Trees are a way of organizing things hierarchically. Many things can be
-represented as a tree for visualization. Many things are _actually_ stored as
-trees by their nature. On your system's hard drive, a directory structure is
-stored as a tree. HTML and XML files are 'serialized' representations of trees
-in a text file. We will be implementing the most basic form of tree (aside from
-the degenerate form, the linked list), the binary tree.
+--------
+Imagine a list as being a numbered sequence of data.
 
-A binary tree has the following attributes:
+    fish = ["shark", "ray", "halibut", "tuna", "squid"]
 
-class BinaryTreeNode
-    get_left() => BinaryTreeNode
-    set_left(BinaryTreeNode)
-    get_right() => BinaryTreeNode
-    set_right(BinaryTreeNode)
-    get_value() => int
-    set_value(int)
+The first element is shark, and you access it by its index number:
+    print fish[0]
+        => shark
 
-The value can be an arbitrary number, and the get_left and get_right methods
-can return a None.
+To access the nth element, its index number is n-1. The fifth element is accessed thusly:
+    print fish[4]
+        => squid
 
-Because a tree is a nested structure, it is difficult to visualize one in text
-mode. However, we do have a few options.
+What if, instead of a numbered index, we could use a string as an index?
+    print fish["deep ocean"]
+        => anglerfish
+    print fish["shallow river"]
+        => candiru
 
-The first option that we will implement is also one of the simplest, a depth
-first traversal.
+We would then need another way of specifying a list where each element is named.
+    fish = {"deep ocean": "anglerfish", "amazon river": "candiru",
+            "lake": "bass", "shallow river": "trout"}
 
-A depth-first traversal visits every node in your tree and prints out the value
-of each node. It does this in a very specific order. First, it prints the value
-of the current node. Then, if it has a left node, it prints the value there. If
-that node also has a left child node, it prints that, too. When it finally
-reaches the bottom, ie: there are no more left nodes, then it prints the right
-node. Note, this is a variant of escaping the minotaur maze. In the minotaur
-maze, we keep our hand on the right wall. If we imagine each junction in the
-maze as a node, this is the equivalent of visiting the right-most node first.
+This is called a dictionary in python. It's also called a hashtable, or a hashmap, or very non-specifically, a map. A dictionary is a collection of 'key-value pairs'. The key 'deep ocean' _maps_ to the value 'anglerfish'.
 
-Here are some examples:
+Imagine you were writing a program to keep track of user scores in a game. If you only had arrays, you might do something like this:
 
-        5
-       / \
-      6   7
+    names  = ["Bob", "Joe", "Jack", "Jane"]
+    scores = [   10,     3,      6,     15]
 
-    print depth_first_traversal(tree)
-    => 5 6 7
+To find Joe's score, first you'd have to find which position "Joe" is in, then use that position to look up his score.
+    index_joe = names.index("Joe")
+    print "Joe's score is %d"%(scores[index_joe])
+        => Joe's score is 3
 
-        2
-       / \
-      9   1
-     /
-    8
-    depth_first_traversal(tree)
-    => 2 9 8 1
+This is unwieldy and complicated. With dictionaries, we could instead do the following:
+    scores = {"Bob": 10, "Joe": 3, "Jack": 6, "Jane": 15}
 
-        2
-       / \
-      9   1
-     /   / \
-    8   3   6
-       / \   \
-      4   0   5
+    print "Joe's score is %d"%(scores['Joe'])
+        => Joe's score is 3 
 
-    depth_first_traversal(tree)
-    => 2 9 8 1 3 4 0 6 5
+Dictionaries have a method called 'get' which allows you to have a default value in case a key does not exist beforehand.
 
-The easiest way to do a depth-first traversal is with a recursive function. It
-should print the value of the current node, then call itself on the left, then
-right node in order.
+    scores = {"Bob": 10, "Joe": 3, "Jack": 6, "Jane": 15}
+    print scores.get("Bob", 0) # The second argument is the fallback number if the key doesn't exist
+        => 10
 
-It may help you to know that ending a print statement with a comma suppresses
-the newline:
+    print scores.get("Billy", 0) # Billy doesn't exist in the dictionary, so return the fallback instead
+        => 0
 
-    eg:
-    print "foo",
-    print "bar",
-    print "baz"
-    => foo bar baz
 
 Description
 -------
-In exercise11.py, you will find an 'abstract class' named BinaryTreeNode. It is
-up to you to fill it in.
+In this directory, you will find a text file, scores.txt, containing a series of local restaurant ratings. Each line looks like this:
+    
+    Restaurant Name:Rating
 
-You will also need to fill in the depth_first_traversal method. To implement
-the behavior described above.
+Your job is to write a program named 'sorted_data.py' reads the file, then spits out the ratings in alphabetical order by restaurant
 
-As you do, run the tests to validate whether or not your implementation works.
-
-    py.test -x
-
-This time, the error messages will not guide your implementation. They are only
-there to verify that you have done the exercise correctly.
+Sample output:
+    Meringue:Exercise07 chriszf$ python sorted_data.py 
+    Restaurant 'Andalu' is rated at 3.
+    Restaurant "Arinell's" is rated at 4.
+    Restaurant 'Bay Blend Coffee and Tea' is rated at 3.
+    Restaurant 'Casa Thai' is rated at 2.
+    Restaurant 'Charanga' is rated at 3.
+    Restaurant 'El Toro' is rated at 5.
+    Restaurant 'Giordano Bros' is rated at 2.
+    Restaurant "Irma's Pampanga" is rated at 5.
+    Restaurant 'Little Baobab' is rated at 1.
+    Restaurant 'Pancho Villa' is rated at 3.
+    Restaurant 'Taqueria Cancun' is rated at 2.
+    Restaurant 'Urbun Burger' is rated at 1.
 
 Concepts required:
-    * Binary trees
-    * Depth first search
+    * dictionaries
+    * reading files
 
 Resources:
-    * http://interactivepython.org/courselib/static/pythonds/Trees/trees.html
-    * http://interactivepython.org/courselib/static/pythonds/Recursion/recursionsimple.html
+    * http://learnpythonthehardway.org/book/ex15.html
+    * http://learnpythonthehardway.org/book/ex16.html
+    * http://learnpythonthehardway.org/book/ex17.html
+    * http://docs.python.org/tutorial/inputoutput.html#methods-of-file-objects
+    * http://learnpythonthehardway.org/book/ex39.html
+    * http://docs.python.org/tutorial/datastructures.html#dictionaries
+    * http://stackoverflow.com/a/3437070
+
+###SPOILERS LEVEL 1
+Identify what you don't know. You have not been asked to open a file and consume its contents yet. You also haven't been asked to use dictionaries yet. You will also need to figure out how to iterate through a dictionary. An important function for iterating through dictionaries is .items()
+
+###SPOILERS LEVEL 2
+Start with the smallest thing possible, copy a line out of the scores.txt file and see if you can parse it using split(), then use the resulting tokens to build a dictionary with one item in it.
+
+###SPOILERS LEVEL 3
+Using the 'main loop' methodology, make your program repeat the process until it consumes all the lines in the file.
+
+###SPOILERS LEVEL 4
+You can't sort a dictionary directly. You can, however, get the list of keys out of a dictionary and sort those. This lets you pull out values one at a time in alphabetical order.
+
+###SPOILERS LEVEL 4
+Pseudocode:
+    # setup
+    create an empty scores dictionary
+    open the file 'sorted.txt'
+    # main loop
+    for each line in the file:
+        split the line by the separator ":"
+        using the first token as a key, insert the second token into the dictionary as a value
+
+    create a list of keys
+    sort the keys
+    for each key in the sorted keys:
+        print the restaurant name and score
+

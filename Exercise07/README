@@ -1,118 +1,132 @@
-Exercise 07: Files and dictionaries
+Exercise 07: Interfaces, main loops revisited
 =======
 
 Introduction
 --------
-Imagine a list as being a numbered sequence of data.
+As we saw before, a main loop looks like this:
 
-    fish = ["shark", "ray", "halibut", "tuna", "squid"]
+    do_setup()
+    while exit_condition_not_reached:
+        input = consume_input()
+        output = evaluate_input(input)
+        print output
 
-The first element is shark, and you access it by its index number:
-    print fish[0]
-        => shark
+When we consume input from the keyboard, this is a special type of main loop called a 'REPL', a read-eval-print-loop.
 
-To access the nth element, its index number is n-1. The fifth element is accessed thusly:
-    print fish[4]
-        => squid
+In exercise 4, we built a very simple REPL that asked for a single number from the user.
 
-What if, instead of a numbered index, we could use a string as an index?
-    print fish["deep ocean"]
-        => anglerfish
-    print fish["shallow river"]
-        => candiru
+In exercise 5, we provided a REPL for you that implemented a basic calculator.
 
-We would then need another way of specifying a list where each element is named.
-    fish = {"deep ocean": "anglerfish", "amazon river": "candiru",
-            "lake": "bass", "shallow river": "trout"}
+In this exercise, you will re-implement the same REPL from scratch. To do this, you will need to tokenize a string.
 
-This is called a dictionary in python. It's also called a hashtable, or a hashmap, or very non-specifically, a map. A dictionary is a collection of 'key-value pairs'. The key 'deep ocean' _maps_ to the value 'anglerfish'.
+Tokenizing a string is the process of taking a string and breaking it up into its constituent parts as a list. Consider the following string:
 
-Imagine you were writing a program to keep track of user scores in a game. If you only had arrays, you might do something like this:
+    ocean_animals = "shark,squid,tuna,flounder"
 
-    names  = ["Bob", "Joe", "Jack", "Jane"]
-    scores = [   10,     3,      6,     15]
+A natural tokenization would be the following array:
+    
+    ["shark", "squid", "tuna", "flounder"]
 
-To find Joe's score, first you'd have to find which position "Joe" is in, then use that position to look up his score.
-    index_joe = names.index("Joe")
-    print "Joe's score is %d"%(scores[index_joe])
-        => Joe's score is 3
+To do this, we use the string split method:
 
-This is unwieldy and complicated. With dictionaries, we could instead do the following:
-    scores = {"Bob": 10, "Joe": 3, "Jack": 6, "Jane": 15}
+    ocean_animals.split(",")
+        => ["shark", "squid", "tuna", "flounder"]
 
-    print "Joe's score is %d"%(scores['Joe'])
-        => Joe's score is 3 
+When we do this, we say we've tokenized the original string on commas.
 
-Dictionaries have a method called 'get' which allows you to have a default value in case a key does not exist beforehand.
+Now consider the following string as read from the keyboard:
 
-    scores = {"Bob": 10, "Joe": 3, "Jack": 6, "Jane": 15}
-    print scores.get("Bob", 0) # The second argument is the fallback number if the key doesn't exist
-        => 10
+    input = "pow 3 5"
 
-    print scores.get("Billy", 0) # Billy doesn't exist in the dictionary, so return the fallback instead
-        => 0
+If we tokenize on spaces, we get the following list:
+
+    tokens = input.split(" ")
+    # tokens = ["pow", "3", "5"]
+
+Now, we can take the first token, token[0], and make a decision about what to do with the remaining tokens. For example:
+
+    if tokens[0] is equal to "pow":
+        call the power function with the other two tokens
+
+The psuedocode for our REPL will look like this:
+
+    # No setup
+    repeat forever:
+        read input
+        tokenize input
+        if the first token is 'q', quit
+        otherwise decide which math function to call based on the tokens we read
 
 
 Description
 -------
-In this directory, you will find a text file, scores.txt, containing a series of local restaurant ratings. Each line looks like this:
+Implement a REPL for a calculator in a file named 'calculator.py'. Your calculator will use the interface from the previous exercise:
+
+    In the file arithmetic.py, these function signatures are required
+
+    add(int, int) -> int
+    Returns the sum of the two input integers
     
-    Restaurant Name:Rating
+    subtract(int, int) -> int
+    Returns the second number subtracted from the first
 
-Your job is to write a program named 'sorted_data.py' reads the file, then spits out the ratings in alphabetical order by restaurant
+    multiply(int, int) -> int
+    Multiplies the two inputs together
 
-Sample output:
-    Meringue:Exercise07 chriszf$ python sorted_data.py 
-    Restaurant 'Andalu' is rated at 3.
-    Restaurant "Arinell's" is rated at 4.
-    Restaurant 'Bay Blend Coffee and Tea' is rated at 3.
-    Restaurant 'Casa Thai' is rated at 2.
-    Restaurant 'Charanga' is rated at 3.
-    Restaurant 'El Toro' is rated at 5.
-    Restaurant 'Giordano Bros' is rated at 2.
-    Restaurant "Irma's Pampanga" is rated at 5.
-    Restaurant 'Little Baobab' is rated at 1.
-    Restaurant 'Pancho Villa' is rated at 3.
-    Restaurant 'Taqueria Cancun' is rated at 2.
-    Restaurant 'Urbun Burger' is rated at 1.
+    divide(int, int) -> float
+    Divides the first input by the second, returning a floating point
+
+    square(int) -> int
+    Returns the square of the input
+
+    cube(int) -> int
+    Returns the cube of the input
+
+    power(int, int) -> int
+    Raises the first integer to the power of the second integer and returns the value.
+
+    mod(int, int) -> int
+    Returns the remainder when the first integer is divided by the second integer.
+
+
+A sample session of the calculator looks like this:
+    Meringue:math chriszf$ python calculator.py
+    > + 1 2
+    3
+    > - 10 5
+    5
+    > * 2 3
+    6
+    > / 6 2
+    3.000000
+    > square 2
+    4
+    > cube 3
+    27
+    > pow 2 5
+    32
+    > mod 10 3
+    1
+    > q
+    Meringue:math chriszf$ 
+
+We have provided a sample arithmetic.py with dummy stubs that do the wrong thing. When you've completed your REPL, copy your completed arithmetic.py from the previous exercise to the current directory and replace our stubs.
 
 Concepts required:
-    * dictionaries
-    * reading files
+    * functions
+    * arithmetic
+    * return values
+    * string parsing
+    * conditionals
 
 Resources:
-    * http://learnpythonthehardway.org/book/ex15.html
-    * http://learnpythonthehardway.org/book/ex16.html
-    * http://learnpythonthehardway.org/book/ex17.html
-    * http://docs.python.org/tutorial/inputoutput.html#methods-of-file-objects
-    * http://learnpythonthehardway.org/book/ex39.html
-    * http://docs.python.org/tutorial/datastructures.html#dictionaries
-    * http://stackoverflow.com/a/3437070
-
-###SPOILERS LEVEL 1
-Identify what you don't know. You have not been asked to open a file and consume its contents yet. You also haven't been asked to use dictionaries yet. You will also need to figure out how to iterate through a dictionary. An important function for iterating through dictionaries is .items()
-
-###SPOILERS LEVEL 2
-Start with the smallest thing possible, copy a line out of the scores.txt file and see if you can parse it using split(), then use the resulting tokens to build a dictionary with one item in it.
-
-###SPOILERS LEVEL 3
-Using the 'main loop' methodology, make your program repeat the process until it consumes all the lines in the file.
-
-###SPOILERS LEVEL 4
-You can't sort a dictionary directly. You can, however, get the list of keys out of a dictionary and sort those. This lets you pull out values one at a time in alphabetical order.
-
-###SPOILERS LEVEL 4
-Pseudocode:
-    # setup
-    create an empty scores dictionary
-    open the file 'sorted.txt'
-    # main loop
-    for each line in the file:
-        split the line by the separator ":"
-        using the first token as a key, insert the second token into the dictionary as a value
-
-    create a list of keys
-    sort the keys
-    for each key in the sorted keys:
-        print the restaurant name and score
-
+    * http://learnpythonthehardway.org/book/ex3.html
+    * http://learnpythonthehardway.org/book/ex18.html
+    * http://learnpythonthehardway.org/book/ex19.html
+    * http://learnpythonthehardway.org/book/ex21.html
+    * http://learnpythonthehardway.org/book/ex29.html
+    * http://learnpythonthehardway.org/book/ex30.html
+    * http://learnpythonthehardway.org/book/ex31.html
+    * http://www.learnpython.org/page/Variables%20and%20Types
+    * http://www.learnpython.org/page/Functions
+    * http://docs.python.org/library/functions.html#int
