@@ -1,132 +1,111 @@
-Exercise 07: Interfaces, main loops revisited
-=======
+Exercise 10: Files and dicts
+============================
 
 Introduction
---------
-As we saw before, a main loop looks like this:
+------------
+Files can also be iterated line-by-line, using a for loop on the file directly.
 
-    do_setup()
-    while exit_condition_not_reached:
-        input = consume_input()
-        output = evaluate_input(input)
-        print output
+For example:
+    twain = open('twain.txt')
+    for line in twain:
 
-When we consume input from the keyboard, this is a special type of main loop called a 'REPL', a read-eval-print-loop.
+        # Do something
 
-In exercise 4, we built a very simple REPL that asked for a single number from the user.
+The loop variable 'line' will store each line of the file in turn.
 
-In exercise 5, we provided a REPL for you that implemented a basic calculator.
+Dictionaries can also be iterated entry-by-entry, using the method iteritems().
 
-In this exercise, you will re-implement the same REPL from scratch. To do this, you will need to tokenize a string.
+For example:
+    my_dict = {'a': 1, 'b': 2, 'c': 3}
+    for key, value in my_dict.iteritems():
+        print "Key == %r, value == %r" % (key, value)+--********
 
-Tokenizing a string is the process of taking a string and breaking it up into its constituent parts as a list. Consider the following string:
+Prints:
+Key == 'a', value == 1
+Key == 'b', value == 2
+Key == 'c', value == 3
 
-    ocean_animals = "shark,squid,tuna,flounder"
+This introduces two loop variables, 'key' and 'value', that will store the key
+and value elements of each dictionary entry in turn.
 
-A natural tokenization would be the following array:
-    
-    ["shark", "squid", "tuna", "flounder"]
+*** NOTE ***
+Before continuing with the problem below, make sure you read the linked resources
+at the bottom of this file.
 
-To do this, we use the string split method:
+Problem Description
+-------------------
 
-    ocean_animals.split(",")
-        => ["shark", "squid", "tuna", "flounder"]
+Write a program, wordcount.py, that opens a file named on the command
+line and counts how many times each space-separated word occurs in
+that file. Your program should then print those counts to the
+screen. For example:
 
-When we do this, we say we've tokenized the original string on commas.
+    inputfile.txt:
+    As I was going to St. Ives
+    I met a man with seven wives
+    Every wife had seven sacks
+    Every sack had seven cats
+    Every cat had seven kits
+    Kits, cats, sacks, wives.
+    How many were going to St. Ives?
 
-Now consider the following string as read from the keyboard:
+    $ python wordcount.py inputfile.txt
+    seven 4
+    Kits, 1
+    sack 1
+    As 1
+    kits 1
+    Ives? 1
+    How 1
+    St. 2
+    had 3
+    sacks, 1
+    to 2
+    going 2
+    was 1
+    cats, 1
+    wives 1
+    met 1
+    Every 3
+    with 1
+    man 1
+    a 1
+    wife 1
+    I 2
+    many 1
+    cat 1
+    Ives 1
+    sacks 1
+    wives. 1
+    were 1
+    cats 1
 
-    input = "pow 3 5"
+You may find the following methods useful:
+    string.split()
+    string.strip()
+    dict.setdefault()
+    dict.iteritems()
 
-If we tokenize on spaces, we get the following list:
+We have provided a file 'twain.txt' for you to test your code on.
 
-    tokens = input.split(" ")
-    # tokens = ["pow", "3", "5"]
+Extra Credit
 
-Now, we can take the first token, token[0], and make a decision about what to do with the remaining tokens. For example:
+The output of your program is not as nice as it could be. Try to improve it:
 
-    if tokens[0] is equal to "pow":
-        call the power function with the other two tokens
+    * Some words are counted separately due to punctuation. Remove punctuation
+      so that they appear as the same word in the output.
 
-The psuedocode for our REPL will look like this:
+    * In the example above, 'Kits' and 'kits' are treated separately because they
+      have different capitalization. Make all words lowercase so that
+      capitalization doesn't matter.
 
-    # No setup
-    repeat forever:
-        read input
-        tokenize input
-        if the first token is 'q', quit
-        otherwise decide which math function to call based on the tokens we read
+    * Sort the output from the highest frequency words to the lowest frequency
+      words.
 
-
-Description
--------
-Implement a REPL for a calculator in a file named 'calculator.py'. Your calculator will use the interface from the previous exercise:
-
-    In the file arithmetic.py, these function signatures are required
-
-    add(int, int) -> int
-    Returns the sum of the two input integers
-    
-    subtract(int, int) -> int
-    Returns the second number subtracted from the first
-
-    multiply(int, int) -> int
-    Multiplies the two inputs together
-
-    divide(int, int) -> float
-    Divides the first input by the second, returning a floating point
-
-    square(int) -> int
-    Returns the square of the input
-
-    cube(int) -> int
-    Returns the cube of the input
-
-    power(int, int) -> int
-    Raises the first integer to the power of the second integer and returns the value.
-
-    mod(int, int) -> int
-    Returns the remainder when the first integer is divided by the second integer.
-
-
-A sample session of the calculator looks like this:
-    Meringue:math chriszf$ python calculator.py
-    > + 1 2
-    3
-    > - 10 5
-    5
-    > * 2 3
-    6
-    > / 6 2
-    3.000000
-    > square 2
-    4
-    > cube 3
-    27
-    > pow 2 5
-    32
-    > mod 10 3
-    1
-    > q
-    Meringue:math chriszf$ 
-
-We have provided a sample arithmetic.py with dummy stubs that do the wrong thing. When you've completed your REPL, copy your completed arithmetic.py from the previous exercise to the current directory and replace our stubs.
-
-Concepts required:
-    * functions
-    * arithmetic
-    * return values
-    * string parsing
-    * conditionals
+    * Sort words having the same frequency alphabetically.
 
 Resources:
-    * http://learnpythonthehardway.org/book/ex3.html
-    * http://learnpythonthehardway.org/book/ex18.html
-    * http://learnpythonthehardway.org/book/ex19.html
-    * http://learnpythonthehardway.org/book/ex21.html
-    * http://learnpythonthehardway.org/book/ex29.html
-    * http://learnpythonthehardway.org/book/ex30.html
-    * http://learnpythonthehardway.org/book/ex31.html
-    * http://www.learnpython.org/page/Variables%20and%20Types
-    * http://www.learnpython.org/page/Functions
-    * http://docs.python.org/library/functions.html#int
+    * http://learnpythonthehardway.org/book/ex39.html
+    * http://www.learnpython.org/page/Dictionaries
+    * http://docs.python.org/library/stdtypes.html#string-methods
+    * http://docs.python.org/library/stdtypes.html#mapping-types-dict

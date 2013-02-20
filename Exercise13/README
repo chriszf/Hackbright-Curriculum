@@ -1,72 +1,39 @@
-Exercise 13: Ugh, are we done with trees yet, also, stacks?!
+Exercise 08: Puzzle Time!
 =======
 
 Introduction
--------
-You may have noticed that the arithmetic expressions we evaluated were highly
-dependent on the existence of parentheses to separate each individual statement
-out.
+--------
+One last basic data type is the tuple. It behaves mostly like a list that cannot be modified. You can create a tuple much in the same way you can create a list, except you use parentheses instead of brackets:
 
-    (((3 + 2) * ((4 - 1) / 3) + 7) * (1 + (-5 + 6)))
-(3+2)*3
-3+2*3
-We need a way to evaluate expressions without the assistance of parentheses.
-Fortunately, someone much smarter came up with an algorithm that does exactly
-that: the shunting-yard algorithm.
+    t = (1,2,3)
+    print t[0]
+        => 1
+    t[0] = 5
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    TypeError: 'tuple' object does not support item assignment
+
+It is useful for doing things like x,y coordinate pairs:
+    sf_location = (-127.32, 45.5)
+
+Now that you've been introduced to (almost) all the basic data types in python, practice manipulating them! These exercises are more like puzzles. You may not resort to stack overflow, you can only use what you learned in LPTHW and the standard python documentation.
 
 Description
 -------
-In exercise13.py, (identical to exercise12), you will implement Edsger
-Djikstra's shunting yard algorithm, found here:
-
-http://en.wikipedia.org/wiki/Shunting-yard_algorithm
-
-However, instead of outputting the original expression in reverse polish
-notation, you will emit a binary parse tree as before. To do that, we will have
-to make some modifications to the algorithm as written.
-
-First, we will ignore all mention of function calls, as we will only work with
-basic operators and integers.
-
-Second, instead simply putting operator tokens on the output queue, whenever an
-operator is going to be moved to the output queue, instead it combines that
-operator with the last two elements on the queueand turns it into a binary tree
-node and puts the node on the queue.
-
-* While there are tokens to be read:
-    * Read a token.
-    * If the token is a number, then add it to the output queue.
-    * If the token is an operator, o1, then:
-        * while there is an operator token, o2, at the top of the stack, and
-          - either o1 is left-associative and its precedence is less than or equal to that of o2,
-          - or o1 has precedence less than that of o2,
-            * pop o2 off the stack, combine it with the last two elements on
-              the queue to produce a binary tree node, then push that node onto
-              the output queue.
-        * push o1 onto the stack.
-    * If the token is a left parenthesis, then push it onto the stack.
-    * If the token is a right parenthesis:
-        * Until the token at the top of the stack is a left parenthesis, 
-          pop operators off the stack, combining them with the last 
-          two elements on the queue to create a binary tree node and putting
-          that node on the stack.
-        * Pop the left parenthesis from the stack, but not onto the output queue.
-        * If the stack runs out without finding a left parenthesis, 
-          then there are mismatched parentheses.
-    * When there are no more tokens to read:
-        * While there are still operator tokens in the stack:
-            * If the operator token on the top of the stack is a parenthesis, 
-              then there are mismatched parentheses.
-            * Pop the operator off the stack and combine it with the last two
-              elements on the output queue to create a binary tree node, then
-              push that node onto the queue.
-* Return the final node on the output queue.
+In this folder, you will find a number of python files. Each one has a task related to data structure (data container) manipulation in python.
 
 Concepts required:
-    * Binary trees
-    * Stacks
-    * Queues
+    * dictionary manipulation
+    * list manipulation
+    * string manipulation
 
 Resources:
-    * http://interactivepython.org/courselib/static/pythonds/Trees/bintreeapps.html#parse-tree
-    * http://en.wikipedia.org/wiki/Shunting-yard_algorithm
+    * http://learnpythonthehardway.org/book/ex32.html
+    * http://learnpythonthehardway.org/book/ex34.html
+    * http://learnpythonthehardway.org/book/ex38.html
+    * http://learnpythonthehardway.org/book/ex39.html
+    * http://docs.python.org/tutorial/introduction.html#lists
+    * http://docs.python.org/tutorial/datastructures.html#dictionaries
+    * http://docs.python.org/tutorial/datastructures.html#looping-techniques
+    * http://docs.python.org/tutorial/datastructures.html#tuples-and-sequences
+    * http://docs.python.org/library/functions.html

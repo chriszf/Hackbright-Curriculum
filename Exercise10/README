@@ -1,111 +1,72 @@
-Exercise 10: Files and dicts
-============================
+Exercise 13: Ugh, are we done with trees yet, also, stacks?!
+=======
 
 Introduction
-------------
-Files can also be iterated line-by-line, using a for loop on the file directly.
+-------
+You may have noticed that the arithmetic expressions we evaluated were highly
+dependent on the existence of parentheses to separate each individual statement
+out.
 
-For example:
-    twain = open('twain.txt')
-    for line in twain:
+    (((3 + 2) * ((4 - 1) / 3) + 7) * (1 + (-5 + 6)))
+(3+2)*3
+3+2*3
+We need a way to evaluate expressions without the assistance of parentheses.
+Fortunately, someone much smarter came up with an algorithm that does exactly
+that: the shunting-yard algorithm.
 
-        # Do something
+Description
+-------
+In exercise13.py, (identical to exercise12), you will implement Edsger
+Djikstra's shunting yard algorithm, found here:
 
-The loop variable 'line' will store each line of the file in turn.
+http://en.wikipedia.org/wiki/Shunting-yard_algorithm
 
-Dictionaries can also be iterated entry-by-entry, using the method iteritems().
+However, instead of outputting the original expression in reverse polish
+notation, you will emit a binary parse tree as before. To do that, we will have
+to make some modifications to the algorithm as written.
 
-For example:
-    my_dict = {'a': 1, 'b': 2, 'c': 3}
-    for key, value in my_dict.iteritems():
-        print "Key == %r, value == %r" % (key, value)+--********
+First, we will ignore all mention of function calls, as we will only work with
+basic operators and integers.
 
-Prints:
-Key == 'a', value == 1
-Key == 'b', value == 2
-Key == 'c', value == 3
+Second, instead simply putting operator tokens on the output queue, whenever an
+operator is going to be moved to the output queue, instead it combines that
+operator with the last two elements on the queueand turns it into a binary tree
+node and puts the node on the queue.
 
-This introduces two loop variables, 'key' and 'value', that will store the key
-and value elements of each dictionary entry in turn.
+* While there are tokens to be read:
+    * Read a token.
+    * If the token is a number, then add it to the output queue.
+    * If the token is an operator, o1, then:
+        * while there is an operator token, o2, at the top of the stack, and
+          - either o1 is left-associative and its precedence is less than or equal to that of o2,
+          - or o1 has precedence less than that of o2,
+            * pop o2 off the stack, combine it with the last two elements on
+              the queue to produce a binary tree node, then push that node onto
+              the output queue.
+        * push o1 onto the stack.
+    * If the token is a left parenthesis, then push it onto the stack.
+    * If the token is a right parenthesis:
+        * Until the token at the top of the stack is a left parenthesis, 
+          pop operators off the stack, combining them with the last 
+          two elements on the queue to create a binary tree node and putting
+          that node on the stack.
+        * Pop the left parenthesis from the stack, but not onto the output queue.
+        * If the stack runs out without finding a left parenthesis, 
+          then there are mismatched parentheses.
+    * When there are no more tokens to read:
+        * While there are still operator tokens in the stack:
+            * If the operator token on the top of the stack is a parenthesis, 
+              then there are mismatched parentheses.
+            * Pop the operator off the stack and combine it with the last two
+              elements on the output queue to create a binary tree node, then
+              push that node onto the queue.
+* Return the final node on the output queue.
 
-*** NOTE ***
-Before continuing with the problem below, make sure you read the linked resources
-at the bottom of this file.
-
-Problem Description
--------------------
-
-Write a program, wordcount.py, that opens a file named on the command
-line and counts how many times each space-separated word occurs in
-that file. Your program should then print those counts to the
-screen. For example:
-
-    inputfile.txt:
-    As I was going to St. Ives
-    I met a man with seven wives
-    Every wife had seven sacks
-    Every sack had seven cats
-    Every cat had seven kits
-    Kits, cats, sacks, wives.
-    How many were going to St. Ives?
-
-    $ python wordcount.py inputfile.txt
-    seven 4
-    Kits, 1
-    sack 1
-    As 1
-    kits 1
-    Ives? 1
-    How 1
-    St. 2
-    had 3
-    sacks, 1
-    to 2
-    going 2
-    was 1
-    cats, 1
-    wives 1
-    met 1
-    Every 3
-    with 1
-    man 1
-    a 1
-    wife 1
-    I 2
-    many 1
-    cat 1
-    Ives 1
-    sacks 1
-    wives. 1
-    were 1
-    cats 1
-
-You may find the following methods useful:
-    string.split()
-    string.strip()
-    dict.setdefault()
-    dict.iteritems()
-
-We have provided a file 'twain.txt' for you to test your code on.
-
-Extra Credit
-
-The output of your program is not as nice as it could be. Try to improve it:
-
-    * Some words are counted separately due to punctuation. Remove punctuation
-      so that they appear as the same word in the output.
-
-    * In the example above, 'Kits' and 'kits' are treated separately because they
-      have different capitalization. Make all words lowercase so that
-      capitalization doesn't matter.
-
-    * Sort the output from the highest frequency words to the lowest frequency
-      words.
-
-    * Sort words having the same frequency alphabetically.
+Concepts required:
+    * Binary trees
+    * Stacks
+    * Queues
 
 Resources:
-    * http://learnpythonthehardway.org/book/ex39.html
-    * http://www.learnpython.org/page/Dictionaries
-    * http://docs.python.org/library/stdtypes.html#string-methods
-    * http://docs.python.org/library/stdtypes.html#mapping-types-dict
+    * http://interactivepython.org/courselib/static/pythonds/Trees/bintreeapps.html#parse-tree
+    * http://en.wikipedia.org/wiki/Shunting-yard_algorithm
