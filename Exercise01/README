@@ -1,4 +1,4 @@
-Exercise 04: Conditionals, variables
+Exercise 01: Conditionals, variables
 =======
 
 Introduction
@@ -25,6 +25,32 @@ In general, a program is structured like this:
         print output
 
 In the case of 'cat', input comes from the file specified on the command line. In the calculator, input comes from the keyboard.
+
+
+Tutorials & Resources:
+-------
+Take a look at these online resources before you attempt this exercise. If you get stuck, check the work you've already completed. 
+
+    * http://learnpythonthehardway.org/book/ex6.html
+    * http://learnpythonthehardway.org/book/ex7.html
+    * http://learnpythonthehardway.org/book/ex11.html
+    * http://learnpythonthehardway.org/book/ex29.html
+    * http://learnpythonthehardway.org/book/ex30.html
+    * http://learnpythonthehardway.org/book/ex31.html
+    * http://learnpythonthehardway.org/book/ex33.html
+    * http://www.learnpython.org/page/Loops
+    * http://www.learnpython.org/page/Conditions
+    * http://docs.python.org/library/functions.html#int
+
+Concepts required:
+    * while loops
+    * 'break' statement
+    * conditionals
+    * user input
+    * formatting strings
+    * the int() function
+
+The name and numbers here were typed in by the user. You will need to understand the concept of while loops, conditionals, getting input from a user, and formatting strings.
 
 
 Description
@@ -69,24 +95,3 @@ A rough pseudocode outline of the program will look like this:
             
 
 
-Concepts required:
-    * while loops
-    * 'break' statement
-    * conditionals
-    * user input
-    * formatting strings
-    * the int() function
-
-The name and numbers here were typed in by the user. You will need to understand the concept of while loops, conditionals, getting input from a user, and formatting strings.
-
-Resources:
-    * http://learnpythonthehardway.org/book/ex6.html
-    * http://learnpythonthehardway.org/book/ex7.html
-    * http://learnpythonthehardway.org/book/ex11.html
-    * http://learnpythonthehardway.org/book/ex29.html
-    * http://learnpythonthehardway.org/book/ex30.html
-    * http://learnpythonthehardway.org/book/ex31.html
-    * http://learnpythonthehardway.org/book/ex33.html
-    * http://www.learnpython.org/page/Loops
-    * http://www.learnpython.org/page/Conditions
-    * http://docs.python.org/library/functions.html#int
