@@ -1,6 +1,26 @@
 Exercise 01: Conditionals, variables
 =======
 
+Tutorials & Resources:
+-------
+Take a look at these online resources before you attempt this exercise. If you get stuck, check the work you've already completed. Do these before starting the exercise below.
+
+    * http://learnpythonthehardway.org/book/ex6.html
+    * http://learnpythonthehardway.org/book/ex7.html
+    * http://learnpythonthehardway.org/book/ex11.html
+    * http://learnpythonthehardway.org/book/ex29.html
+    * http://learnpythonthehardway.org/book/ex30.html
+    * http://learnpythonthehardway.org/book/ex31.html
+    * http://learnpythonthehardway.org/book/ex33.html
+
+Concepts required:
+    * while loops
+    * 'break' statement
+    * conditionals
+    * user input
+    * formatting strings
+    * the int() function
+
 Introduction
 -------
 Programs tend to be structured around a 'main loop', which repeatedly executes the primary task of the program. It is important to understand that the primary task is not necessarily the primary function of the program. As an example, the primary function (or at least, the primary usage) of the program 'cat' is to print the contents of a file to the screen. However, the primary task in accomplishing that is printing individual lines of the file in sequence. In pseudocode, it might look like this:
@@ -25,32 +45,6 @@ In general, a program is structured like this:
         print output
 
 In the case of 'cat', input comes from the file specified on the command line. In the calculator, input comes from the keyboard.
-
-
-Tutorials & Resources:
--------
-Take a look at these online resources before you attempt this exercise. If you get stuck, check the work you've already completed. 
-
-    * http://learnpythonthehardway.org/book/ex6.html
-    * http://learnpythonthehardway.org/book/ex7.html
-    * http://learnpythonthehardway.org/book/ex11.html
-    * http://learnpythonthehardway.org/book/ex29.html
-    * http://learnpythonthehardway.org/book/ex30.html
-    * http://learnpythonthehardway.org/book/ex31.html
-    * http://learnpythonthehardway.org/book/ex33.html
-    * http://www.learnpython.org/page/Loops
-    * http://www.learnpython.org/page/Conditions
-    * http://docs.python.org/library/functions.html#int
-
-Concepts required:
-    * while loops
-    * 'break' statement
-    * conditionals
-    * user input
-    * formatting strings
-    * the int() function
-
-The name and numbers here were typed in by the user. You will need to understand the concept of while loops, conditionals, getting input from a user, and formatting strings.
 
 
 Description
