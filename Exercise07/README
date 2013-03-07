@@ -1,111 +1,87 @@
-Exercise 10: Files and dicts
-============================
+Exercise 07: Files and dictionaries
+=======
 
 Introduction
-------------
-Files can also be iterated line-by-line, using a for loop on the file directly.
+--------
+Imagine a list as being a numbered sequence of data.
 
-For example:
-    twain = open('twain.txt')
-    for line in twain:
+    fish = ["shark", "ray", "halibut", "tuna", "squid"]
 
-        # Do something
+The first element is shark, and you access it by its index number:
+    print fish[0]
+        => shark
 
-The loop variable 'line' will store each line of the file in turn.
+To access the nth element, its index number is n-1. The fifth element is accessed thusly:
+    print fish[4]
+        => squid
 
-Dictionaries can also be iterated entry-by-entry, using the method iteritems().
+What if, instead of a numbered index, we could use a string as an index?
+    print fish["deep ocean"]
+        => anglerfish
+    print fish["shallow river"]
+        => candiru
 
-For example:
-    my_dict = {'a': 1, 'b': 2, 'c': 3}
-    for key, value in my_dict.iteritems():
-        print "Key == %r, value == %r" % (key, value)+--********
+We would then need another way of specifying a list where each element is named.
+    fish = {"deep ocean": "anglerfish", "amazon river": "candiru",
+            "lake": "bass", "shallow river": "trout"}
 
-Prints:
-Key == 'a', value == 1
-Key == 'b', value == 2
-Key == 'c', value == 3
+This is called a dictionary in python. It's also called a hashtable, or a hashmap, or very non-specifically, a map. A dictionary is a collection of 'key-value pairs'. The key 'deep ocean' _maps_ to the value 'anglerfish'.
 
-This introduces two loop variables, 'key' and 'value', that will store the key
-and value elements of each dictionary entry in turn.
+Imagine you were writing a program to keep track of user scores in a game. If you only had arrays, you might do something like this:
 
-*** NOTE ***
-Before continuing with the problem below, make sure you read the linked resources
-at the bottom of this file.
+    names  = ["Bob", "Joe", "Jack", "Jane"]
+    scores = [   10,     3,      6,     15]
 
-Problem Description
--------------------
+To find Joe's score, first you'd have to find which position "Joe" is in, then use that position to look up his score.
+    index_joe = names.index("Joe")
+    print "Joe's score is %d"%(scores[index_joe])
+        => Joe's score is 3
 
-Write a program, wordcount.py, that opens a file named on the command
-line and counts how many times each space-separated word occurs in
-that file. Your program should then print those counts to the
-screen. For example:
+This is unwieldy and complicated. With dictionaries, we could instead do the following:
+    scores = {"Bob": 10, "Joe": 3, "Jack": 6, "Jane": 15}
 
-    inputfile.txt:
-    As I was going to St. Ives
-    I met a man with seven wives
-    Every wife had seven sacks
-    Every sack had seven cats
-    Every cat had seven kits
-    Kits, cats, sacks, wives.
-    How many were going to St. Ives?
+    print "Joe's score is %d"%(scores['Joe'])
+        => Joe's score is 3 
 
-    $ python wordcount.py inputfile.txt
-    seven 4
-    Kits, 1
-    sack 1
-    As 1
-    kits 1
-    Ives? 1
-    How 1
-    St. 2
-    had 3
-    sacks, 1
-    to 2
-    going 2
-    was 1
-    cats, 1
-    wives 1
-    met 1
-    Every 3
-    with 1
-    man 1
-    a 1
-    wife 1
-    I 2
-    many 1
-    cat 1
-    Ives 1
-    sacks 1
-    wives. 1
-    were 1
-    cats 1
+Dictionaries have a method called 'get' which allows you to have a default value in case a key does not exist beforehand.
 
-You may find the following methods useful:
-    string.split()
-    string.strip()
-    dict.setdefault()
-    dict.iteritems()
+    scores = {"Bob": 10, "Joe": 3, "Jack": 6, "Jane": 15}
+    print scores.get("Bob", 0) # The second argument is the fallback number if the key doesn't exist
+        => 10
 
-We have provided a file 'twain.txt' for you to test your code on.
-
-Extra Credit
-
-The output of your program is not as nice as it could be. Try to improve it:
-
-    * Some words are counted separately due to punctuation. Remove punctuation
-      so that they appear as the same word in the output.
-
-    * In the example above, 'Kits' and 'kits' are treated separately because they
-      have different capitalization. Make all words lowercase so that
-      capitalization doesn't matter.
-
-    * Sort the output from the highest frequency words to the lowest frequency
-      words.
-
-    * Sort words having the same frequency alphabetically.
+    print scores.get("Billy", 0) # Billy doesn't exist in the dictionary, so return the fallback instead
+        => 0
 
 Resources:
+    * http://learnpythonthehardway.org/book/ex15.html
+    * http://learnpythonthehardway.org/book/ex16.html
+    * http://learnpythonthehardway.org/book/ex17.html
+    * http://docs.python.org/tutorial/inputoutput.html#methods-of-file-objects
     * http://learnpythonthehardway.org/book/ex39.html
-    * http://www.learnpython.org/page/Dictionaries
-    * http://docs.python.org/library/stdtypes.html#string-methods
-    * http://docs.python.org/library/stdtypes.html#mapping-types-dict
+    * http://docs.python.org/tutorial/datastructures.html#dictionaries
+    * http://stackoverflow.com/a/3437070
+
+
+Description
+-------
+In this directory, you will find a text file, scores.txt, containing a series of local restaurant ratings. Each line looks like this:
+    
+    Restaurant Name:Rating
+
+Your job is to write a program named 'sorted_data.py' reads the file, then spits out the ratings in alphabetical order by restaurant
+
+Sample output:
+    Meringue:Exercise07 chriszf$ python sorted_data.py 
+    Restaurant 'Andalu' is rated at 3.
+    Restaurant "Arinell's" is rated at 4.
+    Restaurant 'Bay Blend Coffee and Tea' is rated at 3.
+    Restaurant 'Casa Thai' is rated at 2.
+    Restaurant 'Charanga' is rated at 3.
+    Restaurant 'El Toro' is rated at 5.
+    Restaurant 'Giordano Bros' is rated at 2.
+    Restaurant "Irma's Pampanga" is rated at 5.
+    Restaurant 'Little Baobab' is rated at 1.
+    Restaurant 'Pancho Villa' is rated at 3.
+    Restaurant 'Taqueria Cancun' is rated at 2.
+    Restaurant 'Urbun Burger' is rated at 1.
+

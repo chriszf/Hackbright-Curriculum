@@ -1,37 +1,55 @@
-List Operations
-===============
+Exercise 05: Files, Creative uses of lists
+==========================================
 
-First, work through the following resources on lists:
-    * http://learnpythonthehardway.org/book/ex32.html
-    * http://learnpythonthehardway.org/book/ex33.html
-    * http://learnpythonthehardway.org/book/ex34.html
-    * http://learnpythonthehardway.org/book/ex38.html
-    * http://www.learnpython.org/page/Lists
-    * http://docs.python.org/tutorial/introduction.html#lists
-    * http://docs.python.org/tutorial/datastructures.html#more-on-lists
-        --> stop reading before section 5.1.1
+Introduction
+------------
+Files can be opened using the .open method, and then processed one character at a time as a bytestream using the .read method with an argument of 1:
 
-In this directory there are two files, list_operations.py and
-test_list_operations.py. Try running "python test_list_operations.py" at the CLI
-prompt. You should see a lot of console output that ends with the following text:
+    f = open("myfile.txt")
+    firstletter = f.read(1)
+    f.close()
 
-----------------------------------------------------------------------
-Ran 25 tests in 0.007s
+The entire file can be read in all at once using the .read method with no arguments:
 
-FAILED (failures=25)
+    f = open("myfile.txt")
+    filetext = f.read()
+    f.close()
 
-The test_list_operations.py file contains tests for the functions defined in
-list_operations.py. All the tests are failing because none of the functions are
-implemented correctly. Your job is to write correct implementations for all the
-functions in list_operations.py.
+Once a file has been read, it can be iterated through as if it were a list:
 
-To check your work, you can run the test_list_operations.py file at any time to
-get information on the currently failing tests. The failures will be listed in
-alphabetical order by function name. When all the tests pass, you will see only
-the following output:
+    # Print one character at a time to the screen
+    for char in filetext:
+        print char
 
-.........................
-----------------------------------------------------------------------
-Ran 25 tests in 0.002s
+Resources:
+    * http://learnpythonthehardway.org/book/ex15.html
+    * http://learnpythonthehardway.org/book/ex16.html
+    * http://learnpythonthehardway.org/book/ex17.html
+    * http://www.asciitable.com/
+    * http://docs.python.org/library/functions.html#ord
 
-OK
+Problem Description
+-------------------
+Write a program, lettercount.py, that opens a file named on the command line and counts how many times each letter occurs in that file. Your program should then print those counts to the screen, in alphabetical order. For example:
+
+    inputfile.txt:
+    An abacus
+
+    $ python lettercount.py inputfile.txt
+    3
+    1
+    1
+    0
+    0
+    ...
+
+Once you've produced appropriate output, you can visualize it by piping the contents of your program to the 'spark' utility installed on your computer:
+
+    $ python lettercount.py inputfile.txt | spark
+    ▃▂▄▁▇▅█▁▇▂▁▁▅▃▅▇▁▄▄▂▂▇▆▄▂▄
+
+You may find the following two methods useful:
+    string.lower()
+    ord()
+
+We have provided a file 'twain.txt' for you to test your code on.

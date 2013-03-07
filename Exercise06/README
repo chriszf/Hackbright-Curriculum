@@ -1,55 +1,108 @@
-Exercise 09: Files, Creative uses of lists
-==========================================
+Exercise 6: Files and dicts
+============================
 
 Introduction
 ------------
-Files can be opened using the .open method, and then processed one character at a time as a bytestream using the .read method with an argument of 1:
+Files can also be iterated line-by-line, using a for loop on the file directly.
 
-    f = open("myfile.txt")
-    firstletter = f.read(1)
-    f.close()
+For example:
+    twain = open('twain.txt')
+    for line in twain:
 
-The entire file can be read in all at once using the .read method with no arguments:
+        # Do something
 
-    f = open("myfile.txt")
-    filetext = f.read()
-    f.close()
+The loop variable 'line' will store each line of the file in turn.
 
-Once a file has been read, it can be iterated through as if it were a list:
+Dictionaries can also be iterated entry-by-entry, using the method iteritems().
 
-    # Print one character at a time to the screen
-    for char in filetext:
-        print char
+For example:
+    my_dict = {'a': 1, 'b': 2, 'c': 3}
+    for key, value in my_dict.iteritems():
+        print "Key == %r, value == %r" % (key, value)+--********
+
+Prints:
+Key == 'a', value == 1
+Key == 'b', value == 2
+Key == 'c', value == 3
+
+This introduces two loop variables, 'key' and 'value', that will store the key
+and value elements of each dictionary entry in turn.
+
+Resources:
+    * http://learnpythonthehardway.org/book/ex39.html
+    * http://www.learnpython.org/page/Dictionaries
+    * http://docs.python.org/library/stdtypes.html#string-methods
+    * http://docs.python.org/library/stdtypes.html#mapping-types-dict
 
 Problem Description
 -------------------
-Write a program, lettercount.py, that opens a file named on the command line and counts how many times each letter occurs in that file. Your program should then print those counts to the screen, in alphabetical order. For example:
+
+Write a program, wordcount.py, that opens a file named on the command
+line and counts how many times each space-separated word occurs in
+that file. Your program should then print those counts to the
+screen. For example:
 
     inputfile.txt:
-    An abacus
+    As I was going to St. Ives
+    I met a man with seven wives
+    Every wife had seven sacks
+    Every sack had seven cats
+    Every cat had seven kits
+    Kits, cats, sacks, wives.
+    How many were going to St. Ives?
 
-    $ python lettercount.py inputfile.txt
-    3
-    1
-    1
-    0
-    0
-    ...
+    $ python wordcount.py inputfile.txt
+    seven 4
+    Kits, 1
+    sack 1
+    As 1
+    kits 1
+    Ives? 1
+    How 1
+    St. 2
+    had 3
+    sacks, 1
+    to 2
+    going 2
+    was 1
+    cats, 1
+    wives 1
+    met 1
+    Every 3
+    with 1
+    man 1
+    a 1
+    wife 1
+    I 2
+    many 1
+    cat 1
+    Ives 1
+    sacks 1
+    wives. 1
+    were 1
+    cats 1
 
-Once you've produced appropriate output, you can visualize it by piping the contents of your program to the 'spark' utility installed on your computer:
-
-    $ python lettercount.py inputfile.txt | spark
-    ▃▂▄▁▇▅█▁▇▂▁▁▅▃▅▇▁▄▄▂▂▇▆▄▂▄
-
-You may find the following two methods useful:
-    string.lower()
-    ord()
+You may find the following methods useful:
+    string.split()
+    string.strip()
+    dict.setdefault()
+    dict.iteritems()
 
 We have provided a file 'twain.txt' for you to test your code on.
 
-Resources:
-    * http://learnpythonthehardway.org/book/ex15.html
-    * http://learnpythonthehardway.org/book/ex16.html
-    * http://learnpythonthehardway.org/book/ex17.html
-    * http://www.asciitable.com/
-    * http://docs.python.org/library/functions.html#ord
+Extra Credit
+
+The output of your program is not as nice as it could be. Try to improve it:
+
+    * Some words are counted separately due to punctuation. Remove punctuation
+      so that they appear as the same word in the output.
+
+    * In the example above, 'Kits' and 'kits' are treated separately because they
+      have different capitalization. Make all words lowercase so that
+      capitalization doesn't matter.
+
+    * Sort the output from the highest frequency words to the lowest frequency
+      words.
+
+    * Sort words having the same frequency alphabetically.
+
