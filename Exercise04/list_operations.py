@@ -102,6 +102,7 @@ def custom_len(input_list):
     """custom_len(input_list) imitates len(input_list)"""
     pass
 
+# For the next four functions, get clever using slice operations described in the first half
 def custom_append(input_list, value):
     """custom_append(input_list, value) imitates input_list.append(value)"""
     pass
