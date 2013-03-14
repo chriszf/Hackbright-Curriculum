@@ -18,7 +18,7 @@ Dictionaries can also be iterated entry-by-entry, using the method iteritems().
 For example:
     my_dict = {'a': 1, 'b': 2, 'c': 3}
     for key, value in my_dict.iteritems():
-        print "Key == %r, value == %r" % (key, value)+--********
+        print "Key == %r, value == %r" % (key, value)
 
 Prints:
 Key == 'a', value == 1
