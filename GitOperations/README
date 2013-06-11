@@ -51,6 +51,8 @@ See how we referenced origin there? That's the nickname of the portal - it tells
 
 Once you've typed `git push origin master` git will ask you for a username - this is the username you signed up with github under. Then, it will ask for a password. When you type, you may be used to seeing asterisks(*) appear, but nothing will show up instead of just displaying your password for the world to see - so don't worry about typing it in in front of your partner.
 
+After this, head over to your Github profile. You should see your new repo has been created, and any files you've added should have been pushed to the server. This is the simplest way to back up your work to the cloud, share code between teams, and make sure you remember what you did, when you did it, with notes to yourself.
+
 
 Further Reading
 ========
