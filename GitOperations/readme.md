@@ -54,6 +54,12 @@ Once you've typed `git push origin master` git will ask you for a username - thi
 
 After this, head over to your Github profile. You should see your new repo has been created, and any files you've added should have been pushed to the server. This is the simplest way to back up your work to the cloud, share code between teams, and make sure you remember what you did, when you did it, with notes to yourself.  
 
+Lastly, you'll want to know how to get that code onto another computer, which we can do with `git clone`.  
+Go up one level with `cd ..`  
+Make a new directory with `mkdir` called `clone` and `cd` into it.
+Type `git clone https://github.com/[username]/Exercise01.git` or whatever the URL you've been using is.
+This should create a new folder underneath where you're at with a copy of your git repository in it. I had you make a new folder so that you wouldn't overwrite the folder you'd already made - **you do not have to make a new directory called `clone` each time**. You'll want to repeat this process on a new computer (without making a clone directory - seriously, you don't have to do that)
+
 Now, run through this exercise to make sure you understand what you've done.
 
 http://try.github.com
@@ -69,3 +75,16 @@ http://ftp.newartisans.com/pub/git.from.bottom.up.pdf
 
 Even more through, is this book:  
 http://git-scm.com/book/en  
+
+
+Summary
+========
+Just to summarize, here are those commands again:
+
+`git init` - This makes a NEW repository. You don't have to do this every time.  
+`git remote` - Lists all remotes you have added  
+`git remote add remote_nickname remote_url ` - Adds a new remote (Remember, create on Github first)
+`git commit` Saves your changes 
+`git commit -m'Some commit message'` - Saves your changes with a message (always use this)
+`git push remote_nickname master` - Sends your changes to Github, or wherever that remote is pointed at.
+
