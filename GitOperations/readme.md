@@ -1,13 +1,11 @@
 Exercise Git: Version Control
 =======
 
-First, make a Github account. I recommend using your twitter username if available. Next, go through these online resources.
-
-Run through this tutorial
+First, make a Github account. I recommend using your twitter username if available. Next, go through:
 
 http://try.github.com
 
-After you've run through those tutorials, head over to the folder you used when completing Exercise01. If your code isn't in a folder called Exercise01 (or similar) already, do a `mkdir Exercise01`, move your files there with `mv` and then `cd` into that folder. Next, run the following commands. 
+After you've run through that, head over to the folder you used when completing Exercise01. If your code isn't in a folder called Exercise01 (or similar) already, do a `mkdir Exercise01`, move your files there with `mv` and then `cd` into that folder. Next, run the following commands. 
 
 `git init`
 
