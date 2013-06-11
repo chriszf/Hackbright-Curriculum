@@ -5,19 +5,19 @@ First, make a Github account. I recommend using your twitter username if availab
 
 http://try.github.com
 
-After you've run through that, head over to the folder you used when completing Exercise01. If your code isn't in a folder called Exercise01 (or similar) already, do a `mkdir Exercise01`, move your files there with `mv` and then `cd` into that folder. Next, run the following commands. 
+After you've run through that, head over to the folder you used when completing Exercise01. If your code isn't in a folder called Exercise01 (or similar) already, do a `mkdir Exercise01`, move your files there with `mv` and then `cd` into that folder. Next, in your Exercise01 folder run the following commands. 
 
 `git init`
 
 This creates a new `git` _repository_, which is like a database that saves every change you make to a line in a file. It remembers what line and what characters you change, with what changes you make, so that if two people work on the same file it can easily merge the two files together. You don't have to run this command more than once in a folder, because the folder is now a repository. It's like the folder gains new commands, in addition to `ls`, `cd`, `pushd` and `popd` you can now run a multitude of commands beginning with the word `git`.
 
 `git init` should only happen on a "project", not on all your folders. Never try to make a `git` repository in a folder above one that already has a `git` repo. Here's an example -
-~/src/exercises/exercise01 - if this folder has a repository in it (type `git status` to see)
-~/src/exercises - this folder should NOT have `git init` run in it, because your computer can become very confused.
+	~/src/exercises/exercise01 - if this folder has a repository in it (type `git status` to see)
+	~/src/exercises - this folder should NOT have `git init` run in it, because your computer can become very confused.
 
 A `git` repository is like a folder, it has individual settings and properties, all of which you can change. Each repository is different, and can have different settings. Let's try setting some now. 
-`git config user.name "Your Name Here"`
-`git config user.email "your_email@example.com"` -- Use the email you've associated with your github account.
+	`git config user.name "Your Name Here"`
+	`git config user.email "your_email@example.com"` -- Use the email you've associated with your github account.
 
 If you leave this repository, these settings don't follow you up the directory tree. If you for instance create an Exercise02 folder, and do `git init` to create a repository there, you'll need to setup these settings again. Because the computer will change every day, this is something you'll need to get used to doing. On your laptop however, you can follow github's 'set up git' tutorial to make these settings global. The settings in your Exercise01 folder will still be there when you get back to that folder, however.
 
