@@ -58,6 +58,26 @@ The psuedocode for our REPL will look like this:
         otherwise decide which math function to call based on the tokens we read
 
 
+Resources:
+
+    * http://learnpythonthehardway.org/book/ex3.html
+    * http://learnpythonthehardway.org/book/ex18.html
+    * http://learnpythonthehardway.org/book/ex19.html
+    * http://learnpythonthehardway.org/book/ex21.html
+    * http://learnpythonthehardway.org/book/ex29.html
+    * http://learnpythonthehardway.org/book/ex30.html
+    * http://learnpythonthehardway.org/book/ex31.html
+    * http://www.learnpython.org/page/Variables%20and%20Types
+    * http://www.learnpython.org/page/Functions
+    * http://docs.python.org/library/functions.html#int
+
+Concepts required:
+    * functions
+    * arithmetic
+    * return values
+    * string parsing
+    * conditionals
+
 Description
 -------
 Implement a REPL for a calculator in a file named 'calculator.py'. Your calculator will use the interface from the previous exercise:
@@ -112,21 +132,3 @@ A sample session of the calculator looks like this:
 
 We have provided a sample arithmetic.py with dummy stubs that do the wrong thing. When you've completed your REPL, copy your completed arithmetic.py from the previous exercise to the current directory and replace our stubs.
 
-Concepts required:
-    * functions
-    * arithmetic
-    * return values
-    * string parsing
-    * conditionals
-
-Resources:
-    * http://learnpythonthehardway.org/book/ex3.html
-    * http://learnpythonthehardway.org/book/ex18.html
-    * http://learnpythonthehardway.org/book/ex19.html
-    * http://learnpythonthehardway.org/book/ex21.html
-    * http://learnpythonthehardway.org/book/ex29.html
-    * http://learnpythonthehardway.org/book/ex30.html
-    * http://learnpythonthehardway.org/book/ex31.html
-    * http://www.learnpython.org/page/Variables%20and%20Types
-    * http://www.learnpython.org/page/Functions
-    * http://docs.python.org/library/functions.html#int
