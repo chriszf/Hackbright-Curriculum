@@ -24,9 +24,9 @@ Next, `git` doesn't know what files you want it to track, so we're going to have
 Now on to adding files. 
 `git add readme.md` will add the readme file you just made to `git`'s database, and tell it to save it next time you "commit". `git` now knows about the file, but you haven't told `git` to save the most recent copy. Let's do that now with `git commit -m'Initial Commit'`.
 
-We need to break down that command, so let's look at the pieces.
-    `git` is the program we're using to keep track of versions of files.
-    `commit` saves a version of everything you've added to the commit as it is right now.
+We need to break down that command, so let's look at the pieces. 
+    `git` is the program we're using to keep track of versions of files. 
+    `commit` saves a version of everything you've added to the commit as it is right now. 
     `-m''` is a flag that means "message". It takes an argument, which is what those '' are for. Inside the '' ("" is also fine) you put a message describing what you did to the file, or files. Something like "added sort function" or "fixing typos on homepage", which summarizes the task you were trying to accomplish. This helps when you need to go back and figure out what you did, or when you need to find an example of a time when you wrote something. It's essentially notes to yourself, or to your team.
 
 This brings us to the next part, where you might have to actually share code - either with people, or just between computers. What we're going to do is create a "remote". The nice thing about keeping our changes line-by-line and character-by-character is that we can just send all of those changes to another computer, apply them in order, and reconstruct the whole file. Then, if you make a change, all you have to do is send the change. The way we send these changes is by establishing a remote. 
