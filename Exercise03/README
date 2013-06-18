@@ -13,9 +13,9 @@ As we saw before, a main loop looks like this:
 
 When we consume input from the keyboard, this is a special type of main loop called a 'REPL', a read-eval-print-loop.
 
-In exercise 4, we built a very simple REPL that asked for a single number from the user.
+In exercise 1, we built a very simple REPL that asked for a single number from the user.
 
-In exercise 5, we provided a REPL for you that implemented a basic calculator.
+In exercise 2, we provided a REPL for you that implemented a basic calculator.
 
 In this exercise, you will re-implement the same REPL from scratch. To do this, you will need to tokenize a string.
 
@@ -24,7 +24,7 @@ Tokenizing a string is the process of taking a string and breaking it up into it
     ocean_animals = "shark,squid,tuna,flounder"
 
 A natural tokenization would be the following array:
-    
+
     ["shark", "squid", "tuna", "flounder"]
 
 To do this, we use the string split method:
@@ -86,7 +86,7 @@ Implement a REPL for a calculator in a file named 'calculator.py'. Your calculat
 
     add(int, int) -> int
     Returns the sum of the two input integers
-    
+
     subtract(int, int) -> int
     Returns the second number subtracted from the first
 
@@ -128,7 +128,7 @@ A sample session of the calculator looks like this:
     > mod 10 3
     1
     > q
-    Meringue:math chriszf$ 
+    Meringue:math chriszf$
 
 We have provided a sample arithmetic.py with dummy stubs that do the wrong thing. When you've completed your REPL, copy your completed arithmetic.py from the previous exercise to the current directory and replace our stubs.
 
