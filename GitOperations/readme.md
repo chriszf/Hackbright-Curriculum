@@ -20,8 +20,9 @@ A `git` repository is like a folder, it has individual settings and properties, 
 If you leave this repository, these settings don't follow you up the directory tree. If you for instance create an Exercise02 folder, and do `git init` to create a repository there, you'll need to setup these settings again. Because the computer will change every day, this is something you'll need to get used to doing. On your laptop however, you can follow github's 'set up git' tutorial to make these settings global. The settings in your Exercise01 folder will still be there when you get back to that folder, however.
 
 Next, `git` doesn't know what files you want it to track, so we're going to have to tell it. 
-`touch readme.md` will create a file in this directory, but it will be blank. You'll need to put something in it with the `subl` command - so type `subl readme.md` and add some text. (Note: Use `sublime` instead of `subl` if `subl` doesn't work.) This will be visible to the world soon, so put something you're OK with people seeing. "First programming exercise at Hackbright!" is a good candidate.
-Now on to adding files. 
+`touch readme.md` will create a file in this directory, but it will be blank. You'll need to put something in it with the `subl` command - so type `subl readme.md` and add some text. (Note: Use `sublime` instead of `subl` if `subl` doesn't work.) This will be visible to the world soon, so put something you're OK with people seeing. "First programming exercise at Hackbright!" is a good candidate.  
+
+Now on to adding files.  
 `git add readme.md` will add the readme file you just made to `git`'s database, and tell it to save it next time you "commit". `git` now knows about the file, but you haven't told `git` to save the most recent copy. Let's do that now with `git commit -m'Initial Commit'`.
 
 We need to break down that command, so let's look at the pieces.  
