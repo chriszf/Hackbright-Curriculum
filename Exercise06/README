@@ -85,7 +85,7 @@ screen. For example:
 You may find the following methods useful:
     string.split()
     string.strip()
-    dict.setdefault()
+    dict.get()
     dict.iteritems()
 
 We have provided a file 'twain.txt' for you to test your code on.
