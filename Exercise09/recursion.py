@@ -1,5 +1,9 @@
 # Multiply all the elements in a list
-def factorial(l):
+def multiply_list(l):
+    return 1
+
+# Return the factorial of n
+def factorial(n):
     return 1
 
 # Count the number of elements in the list l
