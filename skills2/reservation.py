@@ -3,7 +3,10 @@ Reservation finder
 
 Along with this file, you'll find two files named units.csv and reservations.csv with fields in the following format
 
+units.csv
 location_id, unit_size
+
+reservations.csv
 location_id, reservation_start_date, reservation_end_date
 
 You will write a simple application that manages a reservation system. It will have two commands, 'available' and 'reserve' with the following behaviors:
